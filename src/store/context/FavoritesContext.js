@@ -57,7 +57,22 @@ export const useFavoritesContext = () => {
     [ids]
   );
 
-  return { isMealFavorite, toggleFavorite, getFavoritesList };
+  const appendFavoriteKey = React.useCallback(
+    (list) => {
+      return list.map((item) => ({
+        ...item,
+        isFavorite: ids.includes(item.id),
+      }));
+    },
+    [ids]
+  );
+
+  return {
+    isMealFavorite,
+    toggleFavorite,
+    getFavoritesList,
+    appendFavoriteKey,
+  };
 };
 
 export default FavoritesContextProvider;

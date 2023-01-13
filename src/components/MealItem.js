@@ -1,9 +1,10 @@
 import { useNavigation } from "@react-navigation/native";
 import React from "react";
-import { Image, StyleSheet, View } from "react-native";
+import { Image, StyleSheet, View, Text } from "react-native";
 import Card from "./Card";
 import Typography from "./Typography";
 import MealDetail from "./MealDetail";
+import { Ionicons } from "@expo/vector-icons";
 
 const MealItem = (props) => {
   const { title, imageUrl, ...details } = props;
@@ -20,6 +21,11 @@ const MealItem = (props) => {
           {title}
         </Typography>
       </View>
+      {details.isFavorite && (
+        <View style={styles.favIcon}>
+          <Ionicons name="star-sharp" color="gold" size={24} />
+        </View>
+      )}
       <MealDetail {...details} />
     </Card>
   );
@@ -39,6 +45,12 @@ const styles = StyleSheet.create({
     // borderRadius: 8,
     // overflow: "hidden",
     flex: 1,
+  },
+  favIcon: {
+    position: "absolute",
+    top: 0,
+    right: 0,
+    margin: 8,
   },
 });
 
